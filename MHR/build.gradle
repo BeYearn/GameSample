@@ -1,0 +1,37 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile files('libs/MHRGameSDK-pro.jar')
+    compile files('libs/MobCommons-2016.0624.1326.jar')
+    compile files('libs/MobTools-2016.0624.1326.jar')
+    compile files('libs/SMSSDK-2.1.1.jar')
+    compile files('libs/android-support-v4.jar')
+    compile project(':sdkcom')
+}

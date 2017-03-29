@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="330dp"
+    android:background="@drawable/ema_shape_webview_dialog"
+    android:weightSum="6"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:gravity="center">
+        <WebView
+            android:id="@+id/webView_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </WebView>
+    </LinearLayout>
+    <ImageView
+        android:background="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp" />
+    <LinearLayout
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:id="@+id/ema_tv_sure"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15sp"
+            android:background="@drawable/ema_shape_corner_btn0"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:id="@+id/ema_tv_cancel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ema_shape_corner_btn0"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>
