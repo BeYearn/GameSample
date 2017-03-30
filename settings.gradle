@@ -1,1 +1,1 @@
-include ':app', ':EmaSdk', ':MHR', ':sdkcom'
+include ':app', ':EmaSdk', ':MHR', ':sdkcom', ':uc'
