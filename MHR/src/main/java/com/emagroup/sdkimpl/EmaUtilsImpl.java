@@ -1,21 +1,16 @@
 package com.emagroup.sdkimpl;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.emagroup.sdkcom.EmaBackPressedAction;
 import com.emagroup.sdkcom.EmaCallBackConst;
 import com.emagroup.sdkcom.EmaPayInfo;
 import com.emagroup.sdkcom.EmaSDKListener;
-import com.emagroup.sdkcom.EmaSDKUser;
-import com.emagroup.sdkcom.EmaService;
 import com.emagroup.sdkcom.EmaUser;
 import com.emagroup.sdkcom.HttpRequestor;
 import com.emagroup.sdkcom.InitCheck;
 import com.emagroup.sdkcom.ThreadUtil;
-import com.emagroup.sdkcom.ULocalUtils;
 import com.emagroup.sdkcom.Url;
 import com.yingqidm.gamesdk.IPayCallbackListener;
 import com.yingqidm.gamesdk.MHRCallbackListener;
@@ -74,11 +69,8 @@ public class EmaUtilsImpl {
                         EmaUser.getInstance().setAllianceUid(result);
                         EmaUser.getInstance().setNickName("");
 
-                        //绑定服务
-                        Intent serviceIntent = new Intent(mActivity, EmaService.class);
-                        mActivity.bindService(serviceIntent, InitCheck.getInstance(mActivity).mServiceCon, Context.BIND_AUTO_CREATE);
-                        //补充弱账户信息
-                        EmaSDKUser.getInstance(mActivity).updateWeakAccount(listener, ULocalUtils.getAppId(mActivity), ULocalUtils.getChannelId(mActivity), ULocalUtils.getChannelTag(mActivity), ULocalUtils.getDeviceId(mActivity), EmaUser.getInstance().getAllianceUid());
+
+
                     }
                 }
             });
@@ -229,7 +221,7 @@ public class EmaUtilsImpl {
             @Override
             public void run() {
                 try {
-                    String url = Url.getMhrSignJson();
+                    String url = getMhrSignJson();
                     Map<String, String> paramMap = new HashMap<>();
                     paramMap.put("orderId", mPayInfo.getOrderId());
                     paramMap.put("payChannel", channel);
@@ -280,4 +272,11 @@ public class EmaUtilsImpl {
     public void submitGameRole(Map<String, String> data) {
 
     }
+
+
+    //-----------------------------------mhr 特有接口---------------------------------------------------
+    public static String getMhrSignJson(){
+        return Url.getServerUrl()+"/ema-platform/extra/mhrCreateOrder";
+    }
+    //-----------------------------------mhr 特有接口---------------------------------------------------
 }

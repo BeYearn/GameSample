@@ -23,6 +23,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':mhr')
     compile project(':SDKCOMMON')
+    compile project(':uc')
 }

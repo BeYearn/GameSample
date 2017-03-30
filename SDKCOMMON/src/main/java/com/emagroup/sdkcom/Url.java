@@ -16,6 +16,10 @@ public class Url {
         serverUrl=url;
     }
 
+    public static String getServerUrl() {
+        return serverUrl;
+    }
+
     public static String createAlianceAccount(){
         return serverUrl+"/ema-platform/member/createAlianceAccount";
     }
@@ -45,14 +49,5 @@ public class Url {
     public static String channelKeyInfo(){
         return serverUrl+"/ema-platform/admin/channelKeyInfo";
     }
-
-
-
-
-    //-----------------------------------mhr 特有接口---------------------------------------------------
-    public static String getMhrSignJson(){
-        return serverUrl+"/ema-platform/extra/mhrCreateOrder";
-    }
-    //-----------------------------------mhr 特有接口---------------------------------------------------
 
 }

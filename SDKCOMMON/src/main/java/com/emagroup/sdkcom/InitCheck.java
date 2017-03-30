@@ -50,7 +50,7 @@ public class InitCheck {
                     break;
                 case GET_CHANNRLKEY_OK:
                     //发一个继续初始化的广播
-                    Intent intent = new Intent(EmaConst.EMA_BC_GETCHANNEL_OK);
+                    Intent intent = new Intent(EmaConst.EMA_BC_GETCHANNEL_OK_ACTION);
                     intent.putExtra(EmaConst.EMA_BC_CHANNEL_INFO,(String)msg.obj);
                     mActivity.sendBroadcast(intent);
                     break;

@@ -17,7 +17,11 @@ import com.emagroup.sdkcom.EmaBackPressedAction;
 import com.emagroup.sdkcom.EmaConst;
 import com.emagroup.sdkcom.EmaPayInfo;
 import com.emagroup.sdkcom.EmaSDKListener;
+import com.emagroup.sdkcom.EmaSDKUser;
+import com.emagroup.sdkcom.EmaService;
+import com.emagroup.sdkcom.EmaUser;
 import com.emagroup.sdkcom.EmaWebviewDialog;
+import com.emagroup.sdkcom.InitCheck;
 import com.emagroup.sdkcom.ULocalUtils;
 import com.emagroup.sdkimpl.EmaUtilsImpl;
 
@@ -73,26 +77,47 @@ public class EmaUtils {
     };
 
 
-    //广播接收，用来进一步初始化
+
+    /**
+     *广播接收，
+     *  1用来进一步初始化
+     *  2登录成功后的逻辑
+     */
     private BroadcastReceiver getkeyOkReciver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String data = intent.getStringExtra(EmaConst.EMA_BC_CHANNEL_INFO);
-            try {
-                JSONObject object = new JSONObject(data);
-                realInit(object);
-            } catch (JSONException e) {
-                e.printStackTrace();
+            String action = intent.getAction();
+            switch (action){
+                case EmaConst.EMA_BC_GETCHANNEL_OK_ACTION:
+                    String data = intent.getStringExtra(EmaConst.EMA_BC_CHANNEL_INFO);
+                    try {
+                        JSONObject object = new JSONObject(data);
+                        realInit(object);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case EmaConst.EMA_BC_LOGIN_OK_ACTION:
+
+                    //绑定服务
+                    Intent serviceIntent = new Intent(mActivity, EmaService.class);
+                    mActivity.bindService(serviceIntent, InitCheck.getInstance(mActivity).mServiceCon, Context.BIND_AUTO_CREATE);
+                    //补充弱账户信息
+                    EmaSDKUser.getInstance(mActivity).updateWeakAccount(mListener, ULocalUtils.getAppId(mActivity), ULocalUtils.getChannelId(mActivity), ULocalUtils.getChannelTag(mActivity), ULocalUtils.getDeviceId(mActivity), EmaUser.getInstance().getAllianceUid());
+                    break;
             }
         }
     };
+
+
     public void initBroadcastRevicer(EmaSDKListener listener) {
 
-        this.mListener=listener;  // 顺便用来传listener
+        this.mListener=listener;  // 顺便用来传listener(初始化+登录)
 
         //注册可以进一步初始化广播
         IntentFilter filter = new IntentFilter();
-        filter.addAction(EmaConst.EMA_BC_GETCHANNEL_OK);
+        filter.addAction(EmaConst.EMA_BC_GETCHANNEL_OK_ACTION);
+        filter.addAction(EmaConst.EMA_BC_LOGIN_OK_ACTION);
         filter.setPriority(Integer.MAX_VALUE);
         mActivity.registerReceiver(getkeyOkReciver, filter);
     }
@@ -118,12 +143,11 @@ public class EmaUtils {
     /**
      * 登录
      *
-     * @param listener
      * @param userid
      * @param deviceKey
      */
-    public void realLogin(EmaSDKListener listener, String userid, String deviceKey) {
-        EmaUtilsImpl.getInstance(activity).realLogin(listener, userid, deviceKey);
+    public void realLogin(String userid, String deviceKey) {
+        EmaUtilsImpl.getInstance(activity).realLogin(mListener, userid, deviceKey);
 
     }
 

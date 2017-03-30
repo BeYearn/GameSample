@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myggame">
+    package="com.emagroup.example">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -83,7 +83,7 @@
         </activity>
 
 
-        <service android:name="com.emagroup.sdk.EmaService" />
+        <service android:name="com.emagroup.sdkcom.EmaService" />
         <meta-data
             android:name="EMA_APP_ID"
             android:value="n20015"/>

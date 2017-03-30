@@ -20,7 +20,6 @@ import java.util.Map;
 public class EmaSDK {
     private static EmaSDK instance = null;
     public static Activity mActivity = null;
-    private EmaSDKListener mListener;
     private static EmaSDKListener reciveMsgListener;
 
     public static EmaSDK getInstance() {
@@ -35,7 +34,6 @@ public class EmaSDK {
 
         EmaUser.getInstance().setAppkey(appKey);
         this.mActivity = activity;
-        this.mListener = listener;
 
         InitCheck.getInstance(activity).initServerUrl();
 
@@ -51,7 +49,7 @@ public class EmaSDK {
 
     public void doLogin(){      // 具体的实现则用EmaUtils  通用的用com包里的
         Log.e("emasdk1.0","login");
-        EmaUtils.getInstance(mActivity).realLogin(mListener,"", "");
+        EmaUtils.getInstance(mActivity).realLogin("", "");
     }
 
     public void doLogout() {

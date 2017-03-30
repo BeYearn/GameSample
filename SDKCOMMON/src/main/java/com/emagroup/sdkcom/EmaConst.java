@@ -18,7 +18,7 @@ public class EmaConst {
 
 	//----------------------------------------------------------------------------
 
-	public static final String EMA_BC_GETCHANNEL_OK = "ema_getchannel_ok";  //获取渠道key信息成功
+	public static final String EMA_BC_GETCHANNEL_OK_ACTION = "ema_getchannel_ok";  //获取渠道key信息成功
+	public static final String EMA_BC_LOGIN_OK_ACTION = "ema_login_ok";
 	public static final String EMA_BC_CHANNEL_INFO = "initData";
-
 }
