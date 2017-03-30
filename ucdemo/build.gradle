@@ -1,12 +1,14 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 17
+    compileSdkVersion 19
     buildToolsVersion "23.0.3"
-
     defaultConfig {
-        minSdkVersion 10
-        targetSdkVersion 10
+        applicationId "com.emagroup.example"
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
     }
     buildTypes {
         release {
@@ -23,6 +25,5 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':mhr')
-    compile project(':SDKCOMMON')
+    compile project(':EMASDK')
 }
