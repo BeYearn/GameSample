@@ -172,7 +172,7 @@ public class EmaPay {
             @Override
             public void run() {
                 Map<String, String> params = new HashMap<>();
-                params.put("orderId", mPayInfo.getOrderId());
+                params.put("orderId", TextUtils.isEmpty(mPayInfo.getOrderId())?"no order id":mPayInfo.getOrderId());
                 params.put("token", EmaUser.getInstance().getToken());
                 params.put("appId", ULocalUtils.getAppId(mContext));
                 params.put("uid", EmaUser.getInstance().getmUid());
