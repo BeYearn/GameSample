@@ -171,6 +171,9 @@ public class EmaPay {
         ThreadUtil.runInSubThread(new Runnable() {
             @Override
             public void run() {
+                if(null==mPayInfo){
+                    return;
+                }
                 Map<String, String> params = new HashMap<>();
                 params.put("orderId", TextUtils.isEmpty(mPayInfo.getOrderId())?"no order id":mPayInfo.getOrderId());
                 params.put("token", EmaUser.getInstance().getToken());
